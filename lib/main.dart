@@ -113,3 +113,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 }
+
+//
+// Firebase를 초기화하려면 새 firebase_options.dart 파일의 구성으로 firebase_core 패키지에서 Firebase.initializeApp을 호출합니다.
+// import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
+//
+// // ...
+//
+// await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+// );
