@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:naver_map_plugin/naver_map_plugin.dart';
+import 'map.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +30,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   final ScrollController _homeController = ScrollController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,61 +43,65 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           fontWeight: FontWeight.w900,
         ),
       ),
-      body: Center(
-        child: Text('Hello World'),
-      ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Map',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.amber[800],
-        backgroundColor: Colors.white,
-        onTap: (int index) {
-          switch (index) {
-            case 0: //0일땐 홈화면인데 우선 여기선 맨위로 올리는 애니메이션 넣음
-            // only scroll to top when current index is selected.
-              if (_selectedIndex == index) {
-                _homeController.animateTo(
-                  0.0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeOut,
-                );
-              }
-              break;
-            case 1:
-              showModal(context); //1~4까지 각각의 페이지로 이동하게 만들어야함
-              break;
-          }
-          setState(
-                () {
+          currentIndex: _selectedIndex,
+          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.amber[800],
+          backgroundColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
+          onTap: (int index) {
+            setState(() {
               _selectedIndex = index;
-            },
-          );
-        },
+            });
+          },
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              label: 'Map',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorite',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Setting',
+            )
+          ]),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
   }
+
+  List _widgetOptions = [
+    Map(),
+    Text(
+      'Search',
+      style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
+    ),
+    Text(
+      'Map',
+      style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
+    ),
+    Text(
+      'Favorites',
+      style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
+    ),
+    Text(
+      'Settins',
+      style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
+    ),
+  ];
+}
 
   void showModal(BuildContext context) {
     showDialog(
@@ -112,7 +119,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
-}
+
 
 //
 // Firebase를 초기화하려면 새 firebase_options.dart 파일의 구성으로 firebase_core 패키지에서 Firebase.initializeApp을 호출합니다.
