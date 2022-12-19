@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:happyeat/advertisement.dart';
+
 import 'bottom.dart';
 import 'package:flutter/material.dart';
 import 'map2.dart';
 import 'home.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'mypage.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized(); //파이어베이스 초기화
   await Firebase.initializeApp();
@@ -49,11 +51,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   List _widgetOptions = [
     Home(),
     Map(),
-    Text(
-      'Search',
-      style: TextStyle(fontSize: 30, fontFamily: 'DoHyeonRegular'),
-    ),
-  ];
+    mypage(),
+    ];
 }
 
   void showModal(BuildContext context) {
