@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'map.dart';
+import 'widgets/map.dart';
 import 'home.dart';
 import 'navigation/navigationbar.dart';
 import 'settings.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'searchpage.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized(); //파이어베이스 초기화
@@ -52,7 +53,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   List _widgetOptions = [
     Home(),
-    Map(),
+    SearchPage(),
     Settings()
   ];
 }
