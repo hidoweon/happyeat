@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'store.dart';
 
-class StoreMore extends StatefulWidget {
-  const StoreMore({Key? key}) : super(key: key);
+class TabBars extends StatefulWidget {
+  const TabBars({Key? key}) : super(key: key);
 
   @override
-  State<StoreMore> createState() => _StoreMoreState();
+  State<TabBars> createState() => _TabBarsState();
 }
 
-class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMixin {
+class _TabBarsState extends State<TabBars> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -27,20 +27,14 @@ class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverToBoxAdapter(
-                child: Container(
-              height: 250,
-              child: Image.asset('assets/food.png', fit: BoxFit.fill),
-            )),
-          ];
-        },
-        body: SingleChildScrollView(
+      body: SingleChildScrollView(
           padding: EdgeInsets.only(top: 10),
           child: Column(
             children: [
+              Container(
+                height: 250,
+                child: Image.asset('assets/food.png', fit: BoxFit.fill),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
@@ -71,7 +65,7 @@ class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMix
                                         child: Text('마지막 업데이트',
                                             textAlign: TextAlign.left),
                                         padding:
-                                            EdgeInsets.only(left: 10, right: 8),
+                                        EdgeInsets.only(left: 10, right: 8),
                                       ),
                                       Container(
                                         child: Text('4시간전'),
@@ -79,9 +73,9 @@ class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMix
                                       ),
                                       Container(
                                           child: InkWell(
-                                        child: Icon(Icons.refresh),
-                                        onTap: () {},
-                                      ))
+                                            child: Icon(Icons.refresh),
+                                            onTap: () {},
+                                          ))
                                     ],
                                   )
                                 ],
@@ -125,17 +119,17 @@ class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMix
                               children: [
                                 Flexible(
                                     child: Text(
-                                  "사장님의 한 마디",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 25,
-                                      color: Colors.blueAccent),
-                                )),
+                                      "사장님의 한 마디",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 25,
+                                          color: Colors.blueAccent),
+                                    )),
                                 Flexible(
                                     child: Container(
-                                  child: Text('2022/12/29'),
-                                  alignment: Alignment.centerRight,
-                                ))
+                                      child: Text('2022/12/29'),
+                                      alignment: Alignment.centerRight,
+                                    ))
                               ],
                             ),
                             SizedBox(
@@ -152,56 +146,56 @@ class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMix
                 ),
               ), //이름
               TabBar(
-                  padding: EdgeInsets.all(8),
-                  controller: _tabController,
-                  unselectedLabelColor: Colors.blue,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicator: BoxDecoration(
+                padding: EdgeInsets.all(8),
+                controller: _tabController,
+                unselectedLabelColor: Colors.blue,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.grey
-                  ),
-                  tabs: [
-                    Tab(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
+                ),
+                tabs: [
+                  Tab(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           border: Border.all(width: 1, color: Colors.blueAccent)
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text('menu'),
-                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('menu'),
                       ),
                     ),
-                    Tab(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(width: 1, color: Colors.blueAccent)
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text('menu'),
-                        ),
+                  ),
+                  Tab(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(width: 1, color: Colors.blueAccent)
+                      ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('menu'),
                       ),
                     ),
-                    Tab(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(width: 1, color: Colors.blueAccent)
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text('menu'),
-                        ),
+                  ),
+                  Tab(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(width: 1, color: Colors.blueAccent)
                       ),
-                    )
-                  ],
-                ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('menu'),
+                      ),
+                    ),
+                  )
+                ],
+              ),
               Container(
                 child: TabBarView(
                   controller: _tabController,
@@ -210,13 +204,12 @@ class _StoreMoreState extends State<StoreMore> with SingleTickerProviderStateMix
                     Text('ddsd'),
                     Text('ddsd'),
                   ],
-                ),height: 500,
+                ),height: 800,
               )
 
             ],
           ),
-        ),
-      ),
+        )
     );
   }
 }

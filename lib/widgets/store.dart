@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Store extends StatefulWidget {
   const Store({Key? key}) : super(key: key);
@@ -9,10 +10,41 @@ class Store extends StatefulWidget {
 }
 
 class _StoreState extends State<Store> {
-  CollectionReference restaurants =
-      FirebaseFirestore.instance.collection('restaurant');
+  CollectionReference restaurants = FirebaseFirestore.instance.collection('restaurant');
+  List<String> _favoriteStores = [];
 
-  bool _isLiked = false;
+  @override
+  void initState(){
+    super.initState();
+    _loadFavorites();
+  }
+
+  _loadFavorites() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _favoriteStores = prefs.getStringList('favorite_stores') ?? [];
+    });
+  }
+
+  _saveFavorites() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('favorite_stores', _favoriteStores);
+  }
+
+  _likeStore(String storeId){
+    setState(() {
+      _favoriteStores.add(storeId);
+    });
+    _saveFavorites();
+  }
+
+  _unlikeStore(String storeId){
+    setState(() {
+      _favoriteStores.remove(storeId);
+    });
+    _saveFavorites();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +55,12 @@ class _StoreState extends State<Store> {
           stream: restaurants.snapshots(),
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            
+
+
             return ListView.builder(
                 itemCount: streamSnapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  final DocumentSnapshot documentSnapshot =
-                      streamSnapshot.data!.docs[index];
+                  final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
                   return Container(
                     padding:
                         EdgeInsets.only(top: 8, bottom: 8, left: 5, right: 5),
@@ -94,13 +126,6 @@ class _StoreState extends State<Store> {
                               SizedBox(
                                 height: 40,
                               ),
-                              IconButton(
-                                  onPressed: (){
-                                    setState(() {
-                                      _isLiked = !_isLiked;
-                                    });
-                                  },
-                                  icon: _isLiked? Icon(Icons.favorite) : Icon(Icons.favorite_border))
 
 
 

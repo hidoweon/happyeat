@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:happyeat/widgets/store.dart';
 import 'store_more.dart';
+import 'tabbar.dart';
 
 class HomeGrid extends StatefulWidget {
   const HomeGrid({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class _HomeGridState extends State<HomeGrid> {
         Container(
             child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StoreMore()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => TabBars()));
                 },
                 child: Image.asset('assets/한식.png', fit: BoxFit.cover)),
             padding: EdgeInsets.all(2)),

@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  CollectionReference restaurants = FirebaseFirestore.instance.collection('restaurant');
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
               ),
               Container(
                 child: Store(),
-                height: 400,)
+                height: 500)
             ],)
 
         // SingleChildScrollView configuration
